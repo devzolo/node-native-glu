@@ -11,14 +11,14 @@
   ],
   'targets': [
     {
-      'target_name': 'example',
+      'target_name': 'native-glu',
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
       'sources': [
-        'src/example.cc'
+        'src/glu.cc'
       ],
       'defines' : ['NAPI_DISABLE_CPP_EXCEPTIONS','UNICODE'],
-      'libraries': [],
+      'libraries': ['glu32'],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")"
       ],
@@ -27,14 +27,20 @@
     {
       "target_name": "copy_modules",
       "type":"none",
-      "dependencies" : [ "example" ],
+      "dependencies" : [ "native-glu" ],
       "copies":[
         {
           'destination': '<(module_root_dir)\\bin\\<(platform)\\<(target_arch)',
           'files': [
-            '<(module_root_dir)\\build\\Release\\example.node',
+            '<(module_root_dir)\\build\\Release\\native-glu.node',
           ]
         },
+        {
+          'destination': '<(module_root_dir)\\dist',
+          'files': [
+            '<(module_root_dir)\\src\\types\\index.d.ts',
+          ]
+        }
       ]
     }
   ]

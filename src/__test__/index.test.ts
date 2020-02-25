@@ -1,7 +1,7 @@
-import exemple from "..";
+import GLU from "..";
 
-describe('Example Test', () => {
-  it ('exemple.hello() == "world"', () => {
-    expect(exemple.hello()).toEqual('world')
+describe('GLU Build Tests', () => {
+  it ('VERSION_1_1 == 1', () => {
+    expect(GLU.VERSION_1_1).toEqual(1)
   })
 });
