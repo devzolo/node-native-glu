@@ -231,4 +231,5 @@ declare module 'native-glu' {
     function nextContour( tess: GLUtesselatorPtr ,  type: GLenum): void;
     function endPolygon( tess: GLUtesselatorPtr ): void;
   }
+  export default GLU;
 }
