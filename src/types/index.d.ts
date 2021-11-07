@@ -1,5 +1,5 @@
 
-declare module 'native-glu' {
+declare module '@devzolo/node-native-glu' {
   export namespace GLU {
     /****  Generic constants ****/
 
