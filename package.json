@@ -11,6 +11,7 @@
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
     "build": "node-pre-gyp install --build-from-source",
+    "postbuild": "tsc",
     "dist": "tsc",
     "package": "tsc&&node-pre-gyp install --build-from-source&&jest&&./node_modules/.bin/node-pre-gyp build package",
     "test": "jest --coverage",

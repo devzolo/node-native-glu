@@ -19,7 +19,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@devzolo'
       - run: npm install
-      #- run: yarn test
+      #- run: npm run test
       - run: npm run build
       - run: npm publish
         env:
