@@ -8,6 +8,17 @@
   "publishConfig": {
     "@devzolo:registry": "https://npm.pkg.github.com"
   },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "binary": {
+    "module_name": "native-glu",
+    "module_path": "./bin/{platform}/{arch}/",
+    "remote_path": "./releases/download/v{version}/",
+    "package_name": "{module_name}-v{version}-{platform}-{arch}.tar.gz",
+    "host": "https://github.com/devzolo/node-native-glu"
+  },
   "scripts": {
     "install_old": "node-pre-gyp install --fallback-to-build",
     "build": "node-pre-gyp install --build-from-source",
@@ -16,13 +27,6 @@
     "package": "tsc&&node-pre-gyp install --build-from-source&&jest&&./node_modules/.bin/node-pre-gyp build package",
     "test": "jest --coverage",
     "sources": "deps-source"
-  },
-  "binary": {
-    "module_name": "native-glu",
-    "module_path": "./bin/{platform}/{arch}/",
-    "remote_path": "./releases/download/v{version}/",
-    "package_name": "{module_name}-v{version}-{platform}-{arch}.tar.gz",
-    "host": "https://github.com/devzolo/node-native-glu"
   },
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.6",
