@@ -44,6 +44,8 @@ if (info.Length() < argc) { \
   return env.Null(); \
 }
 
+#define JS_THROW_ERR(msg) Napi::Error::New(env, msg).ThrowAsJavaScriptException();
+
 namespace glu {
 
 // function errorString (errCode: GLenum): string;
@@ -152,7 +154,38 @@ Napi::Value build1DMipmaps(const Napi::CallbackInfo& info) {
 // function build2DMipmaps(target:  GLenum ,components: GLint ,width: GLint ,height: GLint ,format:  GLenum ,type:  GLenum , data: GLdouble[]): number;
 Napi::Value build2DMipmaps(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
-  JS_GLU___________________________TODO(build2DMipmaps);
+  JS_ARGS(7);
+  JS_ARG_TYPE(0, Number);
+  JS_ARG_TYPE(1, Number);
+  JS_ARG_TYPE(2, Number);
+  JS_ARG_TYPE(3, Number);
+  JS_ARG_TYPE(4, Number);
+  JS_ARG_TYPE(5, Number);
+  JS_GLENUM_ARG(0, target);
+  JS_GLINT_ARG(1, components);
+  JS_GLINT_ARG(2, width);
+  JS_GLINT_ARG(3, height);
+  JS_GLENUM_ARG(4, format);
+  JS_GLENUM_ARG(5, type);
+
+  void* pixels = nullptr;
+  if (info[6].IsBuffer())
+  {
+    auto buffer = info[6].As<Napi::Buffer<unsigned char>>();
+    pixels = buffer.Data();
+  }
+  // else if (info[8].IsTypedArray())
+  // {
+  //   auto array = info[8].As<Napi::TypedArray>();
+  //   pixels = array.Data();
+  // }
+  else
+  {
+    JS_THROW_ERR("pixels must be a Buffer or TypedArray");
+  }
+
+  gluBuild2DMipmaps(target, components, width, height, format, type, pixels);
+
   return env.Undefined();
 }
 // function newQuadric(): GLUquadricPtr;

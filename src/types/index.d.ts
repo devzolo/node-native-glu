@@ -189,7 +189,7 @@ declare module '@devzolo/node-native-glu' {
     function unProject(winx: GLdouble ,winy: GLdouble ,winz: GLdouble , modelMatrix: GLdouble[], projMatrix: GLdouble [], viewport: GLint[], objx: GLdouble, objy: GLdouble, objz: GLdouble): number;
     function scaleImage(format:  GLenum ,widthin: GLint ,heightin: GLint ,typein:  GLenum , datain: GLdouble[],widthout: GLint ,heightout: GLint ,typeout:  GLenum , dataout: GLdouble[]): number;
     function build1DMipmaps(target:  GLenum ,components: GLint ,width: GLint ,format:  GLenum ,type:  GLenum , data: GLdouble[]): number;
-    function build2DMipmaps(target:  GLenum ,components: GLint ,width: GLint ,height: GLint ,format:  GLenum ,type:  GLenum , data: GLdouble[]): number;
+    function build2DMipmaps(target:  GLenum ,components: GLint ,width: GLint ,height: GLint ,format:  GLenum ,type:  GLenum , data: any): number;
     function newQuadric(): GLUquadricPtr;
     function deleteQuadric (state: GLUquadricPtr): void;
     function quadricNormals(quadObject: GLUquadricPtr, normals: GLenum ): void;

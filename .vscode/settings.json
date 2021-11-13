@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "system_error": "c",
-        "xlocale": "c"
+        "xlocale": "c",
+        "chrono": "cpp"
     }
 }

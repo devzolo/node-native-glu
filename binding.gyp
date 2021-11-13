@@ -40,6 +40,18 @@
           'files': [
             '<(module_root_dir)\\src\\types\\index.d.ts',
           ]
+        },
+       {
+          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-glu\\bin\\<(platform)\\<(target_arch)',
+          'files': [
+            '<(module_root_dir)\\build\\Release\\native-glu.node',
+          ]
+        },
+        {
+          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-glu\\dist',
+          'files': [
+            '<(module_root_dir)\\src\\types\\index.d.ts',
+          ]
         }
       ]
     }
