@@ -17,7 +17,7 @@
       'sources': [
         'src/glu.cc'
       ],
-      'defines' : ['NAPI_DISABLE_CPP_EXCEPTIONS','UNICODE'],
+      'defines' : ['NAPI_DISABLE_CPP_EXCEPTIONS'],
       'libraries': ['glu32'],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")"
