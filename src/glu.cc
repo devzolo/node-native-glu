@@ -1,18 +1,33 @@
 #include <napi.h>
 
-
+// Platform-specific includes
+#ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN             // Excluir itens raramente utilizados dos cabeçalhos do Windows
-// Arquivos de Cabeçalho do Windows
 #include <windows.h>
-// Arquivos de Cabeçalho C RunTime
-#include <stdlib.h>
-#include <malloc.h>
-#include <memory.h>
 #include <tchar.h>
+#else
+// Linux/macOS includes
+#include <unistd.h>
+#include <dlfcn.h>
+#endif
+
+// Standard C includes
+#include <stdlib.h>
+#include <memory.h>
+#ifdef _WIN32
+#include <malloc.h>
+#else
+#include <malloc.h>
+#endif
 
 // OpenGL Graphics Includes
+#ifdef _WIN32
 #include <GL/gl.h>
 #include <GL/glu.h>
+#else
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif
 
 #include <map>
 
@@ -29,8 +44,8 @@ if (info.Length() < argc) { \
 #define JS_LONG_ARG(pos, name) int64_t name = info[pos].As<Napi::Number>().Int64Value();
 #define JS_UINT_ARG(pos, name) uint32_t name = info[pos].As<Napi::Number>().Uint32Value();
 #define JS_STR_ARG(pos, name) std::string name = info[pos].As<Napi::String>().Utf8Value();
-#define JS_DOUBLE_ARG(pos, name) double_t name = info[pos].As<Napi::Number>().DoubleValue();
-#define JS_FLOAT_ARG(pos, name) float_t name = info[pos].As<Napi::Number>().FloatValue();
+#define JS_DOUBLE_ARG(pos, name) double name = info[pos].As<Napi::Number>().DoubleValue();
+#define JS_FLOAT_ARG(pos, name) float name = info[pos].As<Napi::Number>().FloatValue();
 #define JS_PVOID_ARG(pos, name) void* name = (void*)info[pos].As<Napi::Number>().Int64Value();
 
 #define JS_GLDOUBLE_ARG(pos, name) GLdouble name = info[pos].As<Napi::Number>().DoubleValue();

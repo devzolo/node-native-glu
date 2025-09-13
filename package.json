@@ -26,13 +26,14 @@
     "postbuild": "tsc",
     "dist": "tsc",
     "package": "tsc&&node-pre-gyp install --build-from-source&&node --test&&./node_modules/.bin/node-pre-gyp build package",
-        "test": "node --test --experimental-transform-types --no-warnings",
+    "test": "node --test --experimental-transform-types --no-warnings",
     "test:watch": "node --test --watch --experimental-transform-types --no-warnings",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "sources": "deps-source",
     "format": "biome format",
     "format:fix": "biome format --write",
-    "lint": "biome lint"
+    "lint": "biome lint",
+    "check-deps": "node -e \"if(process.platform==='linux'){const{execSync}=require('child_process');try{execSync('pkg-config --exists gl glu',{stdio:'pipe'});console.log('✓ All required system dependencies found');}catch(e){console.log('⚠️  pkg-config check failed, but dependencies might still be available');console.log('If build fails, install: sudo apt-get install libgl1-mesa-dev libglu1-mesa-dev');}\""
   },
   "dependencies": {
     "@mapbox/node-pre-gyp": "^2.0.0",

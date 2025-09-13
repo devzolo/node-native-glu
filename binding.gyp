@@ -18,39 +18,38 @@
         'src/glu.cc'
       ],
       'defines' : ['NAPI_DISABLE_CPP_EXCEPTIONS'],
-      'libraries': ['glu32'],
+      'libraries': [],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")"
       ],
       'library_dirs' : [],
+      "conditions": [
+        ["OS=='win'", {
+          'libraries': ['glu32']
+        }],
+        ["OS=='linux'", {
+          'libraries': ['-lGL', '-lGLU']
+        }],
+        ["OS=='mac'", {
+          'libraries': ['-framework', 'OpenGL']
+        }]
+      ],
     },
     {
       "target_name": "copy_modules",
       "type":"none",
       "dependencies" : [ "native-glu" ],
-      "copies":[
+      "copies": [
         {
-          'destination': '<(module_root_dir)\\bin\\<(platform)\\<(target_arch)',
+          'destination': '<(module_root_dir)/bin/<(platform)/<(target_arch)',
           'files': [
-            '<(module_root_dir)\\build\\Release\\native-glu.node',
+            '<(module_root_dir)/build/Release/native-glu.node',
           ]
         },
         {
-          'destination': '<(module_root_dir)\\dist',
+          'destination': '<(module_root_dir)/dist',
           'files': [
-            '<(module_root_dir)\\src\\types\\index.d.ts',
-          ]
-        },
-       {
-          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-glu\\bin\\<(platform)\\<(target_arch)',
-          'files': [
-            '<(module_root_dir)\\build\\Release\\native-glu.node',
-          ]
-        },
-        {
-          'destination': '<(module_root_dir)\\..\\node-native-opengl-examples\\node_modules\\@devzolo\\node-native-glu\\dist',
-          'files': [
-            '<(module_root_dir)\\src\\types\\index.d.ts',
+            '<(module_root_dir)/src/types/index.d.ts',
           ]
         }
       ]
